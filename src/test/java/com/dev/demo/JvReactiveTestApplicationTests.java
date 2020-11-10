@@ -1,13 +1,11 @@
 package com.dev.demo;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.dev.demo.controller.NodeController;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
-class JvReactiveTestApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
+@RunWith(SpringRunner.class)
+@WebFluxTest(NodeController.class)
+public class JvReactiveTestApplicationTests {
 }

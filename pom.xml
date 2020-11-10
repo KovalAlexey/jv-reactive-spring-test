@@ -6,19 +6,28 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.5.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.dev</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>api</artifactId>
+	<name>api</name>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jv-reactive-test</name>
-	<description>WebFlux app with MongoDB</description>
+	<packaging>jar</packaging>
 
 	<properties>
-		<java.version>11</java.version>
+		<jdk.version>11</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<docker.image.prefix>api</docker.image.prefix>
+		<dockerfile.version>1.4.1</dockerfile.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<version>2.3.5.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
@@ -27,7 +36,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -46,19 +59,43 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<mainClass>com.dev.demo.JvReactiveTestApplication</mainClass>
+							<outputDirectory>${project.basedir}/target</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  mymappdb:
+    image: mongo:latest
+    container_name: mymappdb
+    ports:
+      - 27017:27017
+  api-app-image:
+    image: api-app-image
+    container_name: api-app-image
+    ports:
+      - 8080:8080
+    links:
+      - mymappdb
